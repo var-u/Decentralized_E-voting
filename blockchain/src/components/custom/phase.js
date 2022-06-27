@@ -46,7 +46,7 @@ class phase extends Component {
     handleSubmit = (e) =>{
        
             e.preventDefault();
-            this.setState({phase:this.state.election.methods.phase().call()  });
+            
             this.changePhase();
     }
 
@@ -57,7 +57,7 @@ class phase extends Component {
         .once('receipt', (receipt) => {
             console.log(receipt);
             this.setState({ loading: false });
-            
+          
             window.location.assign("/phase");
         }).
         catch((err)=>{

@@ -3,7 +3,7 @@ import Web3 from 'web3';
 import Election from '../../build/Election.json'
 // import { Link } from 'react-router-dom'
 
-class VoteCount extends Component {
+class candidateDetails extends Component {
 
     async componentWillMount() {
         await this.loadWeb3()
@@ -70,8 +70,6 @@ class VoteCount extends Component {
 
     componentDidMount(){
         console.log(this.props);
-        console.log(this.props.match.params.id);
-
         let id = this.props.match.params.id;
         this.setState({
             id: id,
@@ -99,7 +97,7 @@ class VoteCount extends Component {
                         <i className="material-icons circle blue darken-2">ballot</i>
                         <p><b>{candidates.name}</b></p>
                         <p>{candidates.details}</p>
-                        <p className="secondary-content"><b>{candidates.voteCount}</b></p>
+                       
                     </li>
                 </div>
             )
@@ -108,7 +106,7 @@ class VoteCount extends Component {
             <div className="container">
                 <ul className="collection">
                     <li className="collection-item avatar">
-                    <h3>Candidates</h3>
+                    <h3>Candidate Details</h3>
                     </li>
                         {electionList}
                 </ul>
@@ -117,4 +115,4 @@ class VoteCount extends Component {
     }
 }
 
-export default VoteCount;
+export default candidateDetails;

@@ -19,7 +19,7 @@ class Navbar extends Component {
     render(){
        
        
-        if(this.state.location === "/newelection" || this.state.location === "/elections"  || this.state.location === "/candidates"  || this.state.location === "/voteCount"){
+        if(this.state.location === "/newelection" || this.state.location === "/elections"  || this.state.location === "/phase"  || this.state.location === "/voteCount"){
             return(
                 <nav className="nav-wrapper light darken-2" style={{backgroundColor: "#1976D2" }}>
                     <div className="container">
@@ -27,14 +27,38 @@ class Navbar extends Component {
                             E-Election
                         </a>
                         <ul className="right">
-                            <li><NavLink to="/">Home</NavLink></li>
-                            <li><NavLink to="/newelection">New Election</NavLink></li>
                             <li><NavLink to="/elections">Elections</NavLink></li>
+                            <li><NavLink to="/newelection">New Election</NavLink></li>
+                            <li><NavLink to="/phase">Change Phase</NavLink></li>
+                            <li><NavLink to="/">Logout</NavLink></li>
+
+
                         </ul>
                     </div>
                 </nav>
             )
-        }else{
+        }
+        
+        else if(this.state.location=== "/userResult" || this.state.location=== "/choose"||this.state.location=== "/userManual"  ){
+            return ( 
+                <nav className="nav-wrapper"  style={{backgroundColor: "#1976D2" }}>
+                    <div className="container">
+                        <a className="brand-logo">
+                            E-Election
+                        </a>
+                        <ul className="right">
+                            <li><NavLink to="/userManual">User-Manual</NavLink></li>
+                            <li><NavLink to="/choose">Elections</NavLink></li>
+                            <li><NavLink to="/userResult">Results</NavLink></li>
+                            
+                            <li><NavLink to="/">Logout</NavLink></li>
+                        </ul>
+                    </div>
+                </nav>
+            )
+        }
+        
+        else{
          
 
             return ( 

@@ -60,9 +60,8 @@ class ElectionData extends Component {
                         <br></br>
                         <Link to={"/candidates/" + election.election_id} className="title"   onClick={this.handleInputChange}><button id={election.election_id} className="waves-effect waves-light btn  darken-3" style={{backgroundColor:"#191AD2",color:"#ffffff"}}>Add candidate</button></Link>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to={"/voteCount/" + election.election_id} className="title" onClick={this.handleInputChange}><button id={election.election_id} className="waves-effect waves-light btn  darken-3" style={{backgroundColor:"#19D2D1",color:"#ffffff"}}>View vote Count</button></Link>
+                        <Link to={"/candidateDetails/" + election.election_id} className="title" onClick={this.handleInputChange}><button id={election.election_id} className="waves-effect waves-light btn  darken-3" style={{backgroundColor:"#19D2D1",color:"#ffffff"}}>Candidate Details</button></Link>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to={"/result/" + election.election_id} className="title" onClick={this.handleInputChange}><button id={election.election_id} className="waves-effect waves-light btn  darken-3" style={{backgroundColor:"#19D2D1",color:"#ffffff"}}>Result</button></Link>
 
                     </li>
                 </div>

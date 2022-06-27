@@ -14,10 +14,15 @@ import result from './components/custom/result';
 import phase from './components/custom/phase';
 import registrationPhase from './components/custom/registrationPhase';
 import userResult from './components/custom/userResult';
+import votingPhase from './components/custom/votingPhase';
+import resultPhase from './components/custom/resultPhase';
+import registrationPhaseOver from './components/custom/registrationPhaseOver';
+import candidateDetails from './components/custom/candidateDetails';
 
-import axios from 'axios'
+
 import Web3 from 'web3';
 import Election from './build/Election.json';
+import userManual from './components/custom/userManual';
 
 class App extends Component {
 
@@ -73,7 +78,7 @@ class App extends Component {
     }
 
     render(){
-            const a="hi";
+           
             console.log(this.state.phase);
         return (
         <BrowserRouter>
@@ -82,17 +87,21 @@ class App extends Component {
                
                 <Route exact path="/" component={Home} />
                
-                <Route exact path="/newelection" component={   NewElection   } />               
-                <Route exact path="/elections" component={ElectionData} />
+                <Route exact path="/newelection" component={ this.state.phase === "Registration"?  NewElection :registrationPhaseOver  } />               
+                <Route exact path="/elections" component={ this.state.phase === "Registration"? ElectionData :registrationPhaseOver } />
                 <Route exact path="/candidates/:id" component={NewCandidate} />
                 <Route exact path="/vote/:id" component={Vote} />
-                <Route exact path="/choose" component={Choose} />
+                <Route exact path="/choose" component={this.state.phase === "Result"? resultPhase: Choose} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/voteCount/:id" component={VoteCount}/>
                 <Route exact path="/result/:id" component={result}/>
                 <Route exact path="/userLogin" component={ this.state.phase === "Registration" ?  registrationPhase : userLogin} />
                 <Route exact path="/phase" component={phase}/>
-                <Route exact path="/userResult" component={userResult}/>
+                <Route exact path="/userResult" component={this.state.phase==="Result" ?   userResult : votingPhase}/>
+                <Route exact path="/candidateDetails/:id" component={candidateDetails}/>
+                <Route exact path="/userManual" component={userManual}/>
+
+
 
             </div>
         </BrowserRouter>

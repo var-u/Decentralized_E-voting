@@ -93,7 +93,7 @@ class userLogin extends Component {
                       
                     // })
 
-                window.location.assign("/choose");
+                window.location.assign("/userManual");
                 
                  
                    
