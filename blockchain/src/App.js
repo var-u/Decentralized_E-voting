@@ -98,9 +98,10 @@ class App extends Component {
                 <Route exact path="/userLogin" component={ this.state.phase === "Registration" ?  registrationPhase : userLogin} />
                 <Route exact path="/phase" component={phase}/>
                 <Route exact path="/userResult" component={this.state.phase==="Result" ?   userResult : votingPhase}/>
-                <Route exact path="/candidateDetails/:id" component={candidateDetails}/>
                 <Route exact path="/userManual" component={userManual}/>
 
+                <Route exact path="/candidateDetails/:id" component={candidateDetails}/>
+                
 
 
             </div>
