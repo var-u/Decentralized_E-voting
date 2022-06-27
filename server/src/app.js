@@ -51,57 +51,62 @@ app.post('/api/electionName', async function(req, res) {
     });
 });
 
-app.post('/api/adminLogin', async function(req, res) {
+ app.post('/api/adminLogin',  function(req, res) {
    
-    const username= req.body.username;
-    const  password= req.body.password;
-
-    
-
-   
-    admin.findOne({_id:username+password},function(response,err){
-       
-        if(response){
-            res.send(true);
-        }
-        else{
-            res.send(false);
-        }
-    });
-
-});
-
-
-// app.post("/api/userLogin", function(req,res){
-//     const username= req.body.username;
-//    const  aadhaar= req.body.aadhaar;
+//       admin.create({
+//     username: req.body.username,
+//     password: req.body.password,
   
-//    userLogin.find({}).then(a => {
-//     console.log(a);
-//     for (i = 0; i < a.length; i++){
-//         console.log(a[i].aadhaar);
-//       if(a[i].aadhaar==aadhaar){
-//         res.send(false);
-//       }
-//     }
-//     res.send(true);
-// })
+// }).catch(err=>{
+   
 // });
+
+    
+
+    admin.find({}).then(a => {
+       
+       for (i = 0; i < a.length; i++){
+             
+           if(a[i].password==req.body.password &&a[i].username==req.body.username ){
+            console.log(a[i].password);
+             res.send(true);
+             return;
+           }
+         }
+         res.send(false);
+     }).catch(err=>{
+        console.log(err);
+     })
+
+});
+
+
 app.post("/api/userLogin", function(req,res){
-    const username= req.body.username;
-   const  aadhaar= req.body.aadhaar;
-  
-   userLogin.find({aadhaar:aadhaar},function(err,response){
-    console.log(response);
-    if(err){
-        res.send(false);
-    }
-    else{
-        res.send(true);
-    }
-   })
+   
+//    userLogin.create({
+//     username: req.body.username,
+//     aadhaar: req.body.aadhaar,
+//     voter_id: req.body.voter_id,
+// }).catch(err=>{
+//     console.log(err);
+// });
+userLogin.find({}).then(a => { //create userlogin(s) db in database elections
+       
+       for (i = 0; i < a.length; i++){
+             
+           if(a[i].aadhaar==req.body.aadhaar && a[i].username==req.body.username && a[i].voter_id==req.body.voter_id){
+            console.log(a[i].aadhaar);
+             res.send(true);
+             return;
+           }
+         }
+         res.send(false);
+     }).catch(err=>{
+        console.log(err);
+     })
     
 });
+
 
 
 

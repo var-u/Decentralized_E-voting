@@ -35,15 +35,17 @@ class Vote extends Component {
             this.setState({ election })
             const candCount = await election.methods.candidatesCount().call()
             this.setState({ candCount })
+           
             for (var i = 1; i <= candCount; i++) {
                 const candidates = await election.methods.candidates(i).call()
                 if(candidates.election_id === this.state.id){
                     this.setState({
-                        candidates: [...this.state.candidates, candidates]
+                        candidates: [...this.state.candidates, candidates],
+                        eId:candidates.election_id,
                     })
                 }
             }
-            console.log(this.state.candidates)
+           
         } else {
             window.alert('Election contract not deployed to detected network.')
         }
@@ -53,22 +55,24 @@ class Vote extends Component {
         console.log(e.target.id)
         this.setState({
             selectedId: e.target.id,
+           
         })
-        this.vote(e.target.id);
+        this.vote(e.target.id,e.target.eId);
     }
 
 
     vote(id) {
-        console.log(this.state.selectedId)
+        console.log(this.state.eId)
+        console.log(this.state.account)
         this.setState({ loading: true })
-        this.state.election.methods.vote(id).send({ from: this.state.account })
+        this.state.election.methods.vote(id,this.state.eId).send({ from: this.state.account })
         .once('receipt', (receipt) => {
             console.log(receipt);
             this.setState({ loading: false })
-            window.location.assign("/");
+            window.location.assign("/choose");
         }).
         catch((err)=>{
-            alert("voting Phase is over (or) multiple vote cast detected");
+            alert("multiple vote cast attempt detected");
           
         })
     }
@@ -89,7 +93,8 @@ class Vote extends Component {
             candCount: 0,
             candidates: [],
             loading: true,
-            selectedId: null
+            selectedId: null,
+            eId:null,
         }
     }
 
@@ -105,25 +110,28 @@ class Vote extends Component {
                 //     </li>
                 // </div>
                 
-<div class="card col-sm-6" style={{width: "18rem"}}>
-    <img class="card-img-top" style={{width: "18rem",height:"15rem"}} src="https://imageio.forbes.com/specials-images/dam/imageserve/1063184564/0x0.jpg?format=jpg&width=1200" alt="Card image cap"></img>
+                <div className="card col-md-6 " style={{width: "18rem"}}>
+                    <li>
+                        <img className="card-img-top" style={{width: "18rem",height:"15rem"}} src="https://imageio.forbes.com/specials-images/dam/imageserve/1063184564/0x0.jpg?format=jpg&width=1200" alt="Card image cap"></img>
   
-    <h5 class="card-title">{candidates.name}</h5>
-    <p class="card-text">{candidates.details}</p>
-    <a href="#" id={candidates.id} onClick={this.handleInputChange} class="btn btn-primary">Vote</a>
-  </div>
+                        <h5 className="card-title">{candidates.name}</h5>
+                    <p className="card-text">{candidates.details}</p>
+                    <a href="#" id={candidates.id}  onClick={this.handleInputChange} class="btn btn-primary">Vote</a>
+                     </li>
+                </div>
 
 
 
             )
         }) 
         return(
-            <div className="container">
-                <ul className="collection">
-                    <li className="collection-item avatar">
-                        <h3>Candidates</h3>
-                    </li>
-                        {electionList}
+            <div className="container" >
+                <ul>
+                    <li className="">
+                        <h3>Candidates</h3><br></br>
+                    </li></ul>
+                <ul className="row collection" style={{paddingLeft:"3rem",textAlign:"center", paddingTop:"3rem"}} >
+                   {electionList}
                 </ul>
             </div>
         )

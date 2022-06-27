@@ -59,7 +59,7 @@ class NewCandidate extends Component{
           window.location.assign("/elections");
         }).
         catch((err)=>{
-            alert("registration Phase is over (or) usage of unprevilaged wallet detected");
+            alert(" usage of unprevilaged wallet detected");
           
         })
     }
@@ -71,6 +71,7 @@ class NewCandidate extends Component{
           election: null,
           candidate_name: null,
           candidate_details: null,
+         
           id: null
         }
         this.addCandidates = this.addCandidates.bind(this)
@@ -91,6 +92,7 @@ class NewCandidate extends Component{
                     <label htmlFor="name">Candidate Name</label><br></br>
                     <input type="text" id="candidate_details" name="candidate_details" onChange={this.handleInputChange} required/>
                     <label htmlFor="name">Candidate details</label><br></br><br></br>
+                    
                     <button className="btn blue darken-2" type="submit" name="action">Submit
                         <i className="material-icons right">send</i>
                     </button>
